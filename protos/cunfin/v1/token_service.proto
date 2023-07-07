@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+package cunfin.v1;
+
 service TokenService {
   rpc GenerateToken (GenerateTokenRequest) returns (GenerateTokenResponse);
   rpc Introspect (IntrospectRequest) returns (IntrospectResponse);
