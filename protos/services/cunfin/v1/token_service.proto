@@ -1,7 +1,5 @@
 syntax = "proto3";
 
-
-
 service TokenService {
   rpc GenerateToken (GenerateTokenRequest) returns (GenerateTokenResponse);
   rpc Introspect (IntrospectRequest) returns (IntrospectResponse);
