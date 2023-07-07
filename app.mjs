@@ -26,7 +26,7 @@ function introspect(call, callback) {
 }
 
 /**
- * Starts an RPC
+ * Starts an RPC server
  */
 function main() {
     let server = new grpc.Server();
