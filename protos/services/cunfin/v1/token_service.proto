@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+
+
+service TokenService {
+  rpc GenerateToken (GenerateTokenRequest) returns (GenerateTokenResponse);
+  rpc Introspect (IntrospectRequest) returns (IntrospectResponse);
+}
+
+message GenerateTokenRequest {
+  string subject = 1;
+  string role = 2;
+}
+
+message GenerateTokenResponse {
+  string access_token = 1;
+  string token_type = 2;
+}
+
+message IntrospectRequest {
+  string token = 1;
+}
+
+message IntrospectResponse {
+  bool active = 1;
+}
