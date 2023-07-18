@@ -30,4 +30,5 @@ jobs:
       - name: Push proto files to buf schema registry
         uses: bufbuild/buf-push-action@v1
         with:
-          buf_token: ${{ secrets.BUF_TOKEN }}
+          input: protos
+          buf_token: ${{ secrets.BUF_AUTH_TOKEN }}
