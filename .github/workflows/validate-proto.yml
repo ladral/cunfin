@@ -24,4 +24,5 @@ jobs:
       - name: Check proto files for breaking changes
         uses: bufbuild/buf-breaking-action@v1
         with:
+          input: protos
           against: https://github.com/ladral/cunfin.git#branch=main,subdir=protos
