@@ -5,7 +5,7 @@ on:
     branches: [ main ]
 
 jobs:
-  validate:
+  publish:
     runs-on: ubuntu-latest
 
     steps:
@@ -28,7 +28,6 @@ jobs:
 #          against: https://github.com/ladral/cunfin.git#branch=main,subdir=protos
 
       - name: Push proto files to buf schema registry
-        env:
-          BUF_AUTH_TOKEN: ${{ secrets.BUF_AUTH_TOKEN }}
-        run: |
-          buf push ladral/cunfin
+        uses: bufbuild/buf-push-action@v1
+        with:
+          buf_token: ${{ secrets.BUF_TOKEN }}
