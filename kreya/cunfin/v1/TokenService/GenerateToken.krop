@@ -1,0 +1,13 @@
+{
+  "details": {
+    "methodFqn": "cunfin.v1.TokenService.GenerateToken"
+  },
+  "requests": [
+    {
+      "location": "GenerateToken-request.json"
+    }
+  ],
+  "operationType": "unary",
+  "invokerName": "grpc",
+  "importStreamId": "40069399-0362-49c6-8150-915fbf300388"
+}
