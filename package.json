@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "dev": "nodemon src/app.mjs",
     "start": "node src/app.mjs"
   },
   "dependencies": {
@@ -11,6 +12,7 @@
     "@grpc/proto-loader": "^0.7.7"
   },
   "devDependencies": {
-    "eslint": "^8.45.0"
+    "eslint": "^8.45.0",
+    "nodemon": "^3.0.1"
   }
 }
