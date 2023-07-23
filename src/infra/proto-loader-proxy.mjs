@@ -8,7 +8,7 @@ import path from "path";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-let PROTO_PATH = __dirname + '../../../protos/cunfin/v1/token_service.proto';
+let PROTO_PATH = __dirname + '../../../proto/cunfin/v1/token_service.proto';
 
 // Suggested options for similarity to existing grpc.load behavior
 let packageDefinition = protoLoader.loadSync(
