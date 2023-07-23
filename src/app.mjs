@@ -8,7 +8,7 @@ function introspect(call, callback) {
 }
 
 function generateToken(call, callback) {
-    callback(null, {access_token: "token for: " + call.request.subject, token_type: "Bearer"})
+    callback(null, {access_token: "token for: " + call.request.subject, token_type: "Bearer"});
 }
 
 const server = new grpc.Server();
