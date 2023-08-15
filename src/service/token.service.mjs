@@ -1,0 +1,71 @@
+import fs from 'node:fs';
+import crypto from 'node:crypto';
+import jsonwebtoken from 'jsonwebtoken';
+import {fileURLToPath} from "url";
+import path from "path";
+
+const privateKeyFileName ='cunfin_rsa_private.pem';
+const publicKeyFileName ='cunfin_rsa_public.pem';
+
+
+const keyPair = init();
+
+function init() {
+    try {
+        // try to read key pair from file system
+        const privateKey = fs.readFileSync(getFilePath(privateKeyFileName), 'utf-8');
+        const publicKey = fs.readFileSync(getFilePath(publicKeyFileName), 'utf-8');
+
+        return { privateKey: privateKey, publicKey: publicKey };
+
+    } catch (error) {
+        console.log('No public key found. Generating a new one.');
+        return genKeyPair();
+    }
+}
+
+function getFilePath(filename) {
+    const __filename = fileURLToPath(import.meta.url);
+    const __dirname = path.dirname(__filename);
+
+    return path.join(__dirname, filename);
+}
+
+function genKeyPair() {
+    // Generates an object where the keys are stored in properties `privateKey` and `publicKey`
+    const keyPair = crypto.generateKeyPairSync("rsa", {
+        modulusLength: 4096, // bits - standard for RSA keys
+        publicKeyEncoding: {
+            type: "pkcs1", // "Public Key Cryptography Standards 1"
+            format: "pem", // Most common formatting choice
+        },
+        privateKeyEncoding: {
+            type: "pkcs1", // "Public Key Cryptography Standards 1"
+            format: "pem", // Most common formatting choice
+        },
+    });
+
+    // Create the public key file
+    fs.writeFileSync(getFilePath(publicKeyFileName), keyPair.publicKey);
+
+    // Create the private key file
+    fs.writeFileSync(getFilePath(privateKeyFileName), keyPair.privateKey);
+
+    return keyPair;
+}
+
+export function issueJWT(subject) {
+
+    const payload = {
+        sub: subject,
+        iat: Date.now(),
+        issuer: 'cunfin'
+    };
+
+    const expiresIn = '1d';
+
+    console.log(keyPair.privateKey);
+
+    const signedToken = jsonwebtoken.sign(payload, keyPair.privateKey, { expiresIn: expiresIn, algorithm: 'RS256' });
+    return signedToken;
+}
