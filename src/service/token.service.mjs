@@ -19,14 +19,19 @@ function init() {
         return { privateKey: privateKey, publicKey: publicKey };
 
     } catch (error) {
-        console.log('No public key found. Generating a new one.');
+        console.log('No public key found. Generating a new one');
         return genKeyPair();
     }
 }
 
 function getFilePath(filename) {
     const __filename = fileURLToPath(import.meta.url);
-    const __dirname = path.dirname(__filename);
+    const __dirname = path.resolve(__filename, "..", "..", "..", "keys");
+
+    if (!fs.existsSync(__dirname)) {
+        fs.mkdirSync(__dirname);
+        console.log('Key folder created successfully');
+    }
 
     return path.join(__dirname, filename);
 }
@@ -64,8 +69,5 @@ export function issueJWT(subject) {
 
     const expiresIn = '1d';
 
-    console.log(keyPair.privateKey);
-
-    const signedToken = jsonwebtoken.sign(payload, keyPair.privateKey, { expiresIn: expiresIn, algorithm: 'RS256' });
-    return signedToken;
+    return jsonwebtoken.sign(payload, keyPair.privateKey, {expiresIn: expiresIn, algorithm: 'RS256'});
 }
