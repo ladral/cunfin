@@ -9,7 +9,8 @@ service TokenService {
 
 message GenerateTokenRequest {
   string subject = 1;
-  string role = 2;
+  string user_principal_name = 2;
+  repeated string roles = 3;
 }
 
 message GenerateTokenResponse {

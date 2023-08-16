@@ -10,7 +10,7 @@ function introspect(call, callback) {
 
 function generateToken(call, callback) {
     console.log("generating new JWT token");
-    const accessToken = issueJWT(call.request.subject);
+    const accessToken = issueJWT(call.request);
     callback(null, {access_token: accessToken, token_type: "Bearer"});
 }
 
