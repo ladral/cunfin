@@ -1,4 +1,5 @@
 {
-  "subject": "Principal mobile",
-  "role": "Intelligent Metal Soap 6th generation"
+  "subject": "John Doe",
+  "userPrincipalName": "john.doe@example.com",
+  "roles": ["admin", "user"]
 }

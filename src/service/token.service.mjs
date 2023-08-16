@@ -59,12 +59,15 @@ function genKeyPair() {
     return keyPair;
 }
 
-export function issueJWT(subject) {
+export function issueJWT(claims) {
+    const currentTimestamp = Math.floor(Date.now() / 1000);
 
     const payload = {
-        sub: subject,
-        iat: Date.now(),
-        issuer: 'cunfin'
+        sub: claims.subject,
+        upn: claims.user_principal_name,
+        roles: claims.roles,
+        iat: currentTimestamp,
+        iss: 'cunfin'
     };
 
     const expiresIn = '1d';
