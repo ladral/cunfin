@@ -6,6 +6,7 @@ import path from "path";
 
 const privateKeyFileName ='cunfin_rsa_private.pem';
 const publicKeyFileName ='cunfin_rsa_public.pem';
+const algorithm = "RS256";
 
 
 const keyPair = init();
@@ -72,5 +73,30 @@ export function issueJWT(claims) {
 
     const expiresIn = '1d';
 
-    return jsonwebtoken.sign(payload, keyPair.privateKey, {expiresIn: expiresIn, algorithm: 'RS256'});
+    return jsonwebtoken.sign(payload, keyPair.privateKey, {expiresIn: expiresIn, algorithm: algorithm});
+}
+
+export function verify(authorizationHeader) {
+    const tokenParts = authorizationHeader.split(' ');
+
+    // pattern of which the token should begin with
+    const bearerPattern = /^bearer/i;
+
+    // expected token structure
+    const tokenPattern = /\S+\.\S+\.\S+/;
+
+    // check if the token structure is valid
+    if (bearerPattern.test(tokenParts[0]) && tokenParts[1].match(tokenPattern) !== null) {
+
+        try {
+            const verification = jsonwebtoken.verify(tokenParts[1], keyPair.publicKey, { algorithms: [algorithm] });
+
+            return  true;
+        } catch(err) {
+            return  false;
+        }
+
+    } else {
+        return false;
+    }
 }

@@ -1,17 +1,18 @@
-import { loadProtoDefinition } from "./infra/proto-loader-proxy.mjs";
-import { issueJWT } from "./service/token.service.mjs";
+import {loadProtoDefinition} from "./infra/proto-loader-proxy.mjs";
+import {issueJWT, verify} from "./service/token.service.mjs";
 import grpc from "@grpc/grpc-js";
 
 const protoDefinition = loadProtoDefinition();
 
 function introspect(call, callback) {
-    callback(null, {active: true});
+    const result = verify(call.request.token);
+    callback(null, {active: result});
 }
 
 function generateToken(call, callback) {
     console.log("generating new JWT token");
     const accessToken = issueJWT(call.request);
-    callback(null, {access_token: accessToken, token_type: "Bearer"});
+    callback(null, { access_token: accessToken, token_type: "Bearer" });
 }
 
 const server = new grpc.Server();
