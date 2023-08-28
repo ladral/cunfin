@@ -26,8 +26,8 @@ jobs:
           input: proto
 
       # Run breaking change detection for Protobuf sources against the current `main` branch
-#      - name: Check proto files for breaking changes
-#        uses: bufbuild/buf-breaking-action@v1
-#        with:
-#          input: proto
-#          against: https://github.com/ladral/cunfin.git#branch=main,subdir=proto
+      - name: Check proto files for breaking changes
+        uses: bufbuild/buf-breaking-action@v1
+        with:
+          input: proto
+          against: https://github.com/ladral/cunfin.git#branch=main,subdir=proto
