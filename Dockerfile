@@ -1,4 +1,4 @@
-FROM node:18.17.1 AS build
+FROM node:18.17.1@sha256:11e9c297fc51f6f65f7d0c7c8a8581e5721f2f16de43ceff1a199fd3ef609f95 AS build
 
 WORKDIR /app
 
@@ -10,7 +10,7 @@ RUN npm install --production
 
 COPY --chown=node:node . .
 
-FROM node:18.17.1-alpine
+FROM node:18.17.1-alpine@sha256:3482a20c97e401b56ac50ba8920cc7b5b2022bfc6aa7d4e4c231755770cf892f
 
 MAINTAINER ladral
 
