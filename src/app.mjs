@@ -26,5 +26,39 @@ server.addService(protoDefinition.cunfin.v1.TokenService.service, {
 /* start gRPC server */
 server.bindAsync('0.0.0.0:50051', grpc.ServerCredentials.createInsecure(), () => {
     server.start();
-    console.log('gRPC server started successfully.');
+    console.log('gRPC server started successfully');
 });
+
+async function closeGracefully(signal) {
+    console.log(`Received signal to terminate: ${signal}`);
+    return new Promise((resolve, reject) => {
+        server.tryShutdown((error) => {
+            if (error) {
+                console.error('Error during graceful shutdown:', error);
+                reject(error);
+            } else {
+                console.log('gRPC server shut down gracefully');
+                resolve();
+            }
+        });
+    });
+}
+
+process.on('SIGINT', () => {
+        closeGracefully('SIGINT').then(() => {
+            process.exit(0);
+        }).catch(() => {
+            server.forceShutdown();
+            process.exit(1);
+        });
+});
+
+process.on('SIGTERM', () => {
+    closeGracefully('SIGINT').then(() => {
+        process.exit(0);
+    }).catch(() => {
+        server.forceShutdown();
+        process.exit(1);
+    });
+});
+
