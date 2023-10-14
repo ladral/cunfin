@@ -22,3 +22,4 @@ jobs:
         uses: crazy-max/ghaction-container-scan@v2
         with:
           image: ladral/cunfin:latest
+          severity_threshold: MEDIUM
