@@ -1,4 +1,4 @@
-name: Validate Proto Files
+name: Validate proto files
 
 on:
   pull_request:

@@ -1,4 +1,4 @@
-name: Push Proto Files to BSR
+name: Push proto files to BSR
 
 on:
   push:
