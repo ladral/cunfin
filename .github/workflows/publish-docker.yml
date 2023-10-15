@@ -37,7 +37,7 @@ jobs:
         id: scan
         uses: crazy-max/ghaction-container-scan@v3
         with:
-          image: ladral/${{ steps.meta.outputs.tags }}
+          image: ladral/cunfin:latest
           dockerfile: ./Dockerfile
 
       - name: Upload SARIF file
