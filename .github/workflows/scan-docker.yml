@@ -1,0 +1,25 @@
+name: Scan Docker image for vulnerabilities
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          push: false
+          tags: ladral/cunfin:latest
+
+      - name: Scan for vulnerabilities
+        uses: crazy-max/ghaction-container-scan@v3
+        with:
+          image: ladral/cunfin:latest
+          severity_threshold: MEDIUM
