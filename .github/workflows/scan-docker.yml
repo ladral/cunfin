@@ -19,7 +19,7 @@ jobs:
           tags: ladral/cunfin:latest
 
       - name: Scan for vulnerabilities
-        uses: crazy-max/ghaction-container-scan@v2
+        uses: crazy-max/ghaction-container-scan@v3
         with:
           image: ladral/cunfin:latest
           severity_threshold: MEDIUM
