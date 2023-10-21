@@ -35,7 +35,7 @@
 8. remove docker image: `docker rmi cunfin`
    - remove docker image if started from official Docker Hub image: `docker rmi ladral/cunfin`
 
-It's also possible to provide own private and public certificates to generate the JWT tokens. 
-5. Just mount the certificate on container startup (step 5):  `docker run -v <host_path>:/app/keys cunfin`
+It's also possible to provide own private and public keys to generate the JWT tokens.
+5. Just mount the keys (type:pkcs1, format: pem) on container startup (step 5):  `docker run -v <host_path>:/app/keys cunfin`
    - example for unix systems (linux/mac): `docker run -v $(pwd)/keys:/app/keys cunfin`
    - example for Windows: `MSYS_NO_PATHCONV=1 docker run -v $(pwd)/keys:/app/keys cunfin`
