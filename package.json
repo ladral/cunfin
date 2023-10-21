@@ -5,12 +5,14 @@
   "type": "module",
   "scripts": {
     "dev": "nodemon src/app.mjs",
-    "start": "node src/app.mjs"
+    "start": "pm2 start src/app.mjs",
+    "stop": "pm2 kill"
   },
   "dependencies": {
     "@grpc/grpc-js": "^1.8.17",
     "@grpc/proto-loader": "^0.7.7",
-    "jsonwebtoken": "^9.0.1"
+    "jsonwebtoken": "^9.0.1",
+    "pm2": "^5.3.0"
   },
   "devDependencies": {
     "eslint": "^8.45.0",
