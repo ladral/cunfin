@@ -17,7 +17,7 @@
 
 4. Validate JWT token with the Introspect gRPC call 
 
-4. stop application `npm run stop`
+5. stop application `npm run stop`
     - if started in development mode use `ctrl + c` to stop the application
 
 ## Docker
@@ -36,6 +36,7 @@
    - remove docker image if started from official Docker Hub image: `docker rmi ladral/cunfin`
 
 It's also possible to provide own private and public keys to generate the JWT tokens.
-5. Just mount the keys (type:pkcs1, format: pem) on container startup (step 5):  `docker run -v <host_path>:/app/keys cunfin`
+ 
+5. Mount the keys (type:pkcs1, format: pem) on container startup (step 5):  `docker run -v <host_path>:/app/keys cunfin`
    - example for unix systems (linux/mac): `docker run -v $(pwd)/keys:/app/keys cunfin`
    - example for Windows: `MSYS_NO_PATHCONV=1 docker run -v $(pwd)/keys:/app/keys cunfin`
