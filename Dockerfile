@@ -12,14 +12,14 @@ COPY --chown=node:node . .
 FROM node:18.18.1-alpine@sha256:c41b5bfd0ef6f2db8f50323ce5ffb39f4ad444b5e5796c819ba4b1b799fbfdc2
 ENV NODE_ENV production
 
-MAINTAINER ladral
+LABEL maintainer="ladral"
 
 WORKDIR /app
 
 RUN mkdir -p keys
 RUN chown -R node:node keys
 
-RUN apk add dumb-init
+RUN apk --no-cache add dumb-init
 
 USER node
 
