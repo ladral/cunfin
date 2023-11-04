@@ -42,7 +42,7 @@ The gRPC API specification for this application is published on the [buf schema 
 
 The buf schema registry also provides [SDK's](https://buf.build/ladral/cunfin/sdks/main) generated for several programming languages, making it easier to work with the gRPC API.
 
-### Example (nodejs)
+### Example (nodejs - CommonjS)
 Using the Application from another node.js service:
 
 1. Make sure you have Node.js installed on your system.
