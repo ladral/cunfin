@@ -36,6 +36,7 @@ It's also possible to provide own private and public keys to generate the JWT to
 5. Mount the keys (type:pkcs1, format: pem) on container startup (step 5):  `docker run -v <host_path>:/app/keys cunfin`
    - example for unix systems (linux/mac): `docker run -v $(pwd)/keys:/app/keys cunfin`
    - example for Windows: `MSYS_NO_PATHCONV=1 docker run -v $(pwd)/keys:/app/keys cunfin`
+   - the keys must be named as followed: **cunfin_rsa_private.pem** and **cunfin_rsa_public.pem**
 
 ## Using the application from another service
 The gRPC API specification for this application is published on the [buf schema registry](https://buf.build/ladral/cunfin). 
