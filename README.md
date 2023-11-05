@@ -78,8 +78,7 @@ function getToken(callback) {
    client.generateToken(request, (err, res) => {
       if (err) {
          console.error(err);
-         callback(err);
-         return;
+         return callback(err);
       }
 
       console.log(`Token generated successfully`);
