@@ -12,16 +12,27 @@ const algorithm = "RS256";
 const keyPair = init();
 
 function init() {
-    try {
-        // try to read key pair from file system
-        const privateKey = fs.readFileSync(getFilePath(privateKeyFileName), 'utf-8');
-        const publicKey = fs.readFileSync(getFilePath(publicKeyFileName), 'utf-8');
+    const privateKey = process.env.CUNFIN_RSA_PRIVATE_KEY;
+    const publicKey = process.env.CUNFIN_RSA_PUBLIC_KEY;
 
+    if (privateKey && publicKey) {
+        console.log('Using provided key to generate JWT tokens');
         return { privateKey: privateKey, publicKey: publicKey };
+    } else {
+        console.log('No keys provides in environment variables to generate JWT tokens');
+        console.log('Using keys from filesystem as fallback');
 
-    } catch (error) {
-        console.log('No public key found. Generating a new one');
-        return genKeyPair();
+        try {
+            // try to read key pair from file system
+            const privateKeyFileSystem = fs.readFileSync(getFilePath(privateKeyFileName), 'utf-8');
+            const publicKeyFileSystem = fs.readFileSync(getFilePath(publicKeyFileName), 'utf-8');
+
+            return { privateKey: privateKeyFileSystem, publicKey: publicKeyFileSystem };
+
+        } catch (error) {
+            console.log('No keys found to generate JWT tokens. Generating new keys');
+            return genKeyPair();
+        }
     }
 }
 

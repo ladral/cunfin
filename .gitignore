@@ -6,3 +6,5 @@
 
 # App specific
 /keys
+/certs
+/.env
