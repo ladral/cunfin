@@ -1,5 +1,8 @@
 # cunfin
 
+Cunfin is a gRPC-based JWT Token Microservice that generates JWT (JSON Web Token) tokens and provides an introspect endpoint to validate these tokens. 
+This microservice is designed to be integrated into a microservice architecture, providing a secure and efficient authentication mechanism for your applications.
+
 ## Installation guide
 
 1. Install npm (shipped with node, nvm recommended for node install)
@@ -121,6 +124,14 @@ function getToken(callback) {
     });
 }
 ```
+
+If you have initiated the cunfin application with a TLS connection certificate, please add the certificate to the client as shown below:
+
+```javascript
+  const tlsCert = fs.readFileSync(getFilePath(certFileName), 'utf-8');
+  const client = new tokenServiceGrpc.TokenServiceClient('localhost:50051', grpc.credentials.createSsl(Buffer.from(tlsCert)));
+```
+
 
 5. Call the getToken function from your code, passing a callback function to handle the response:
 
