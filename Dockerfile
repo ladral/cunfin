@@ -1,4 +1,4 @@
-FROM node:20.9.0@sha256:8e015de364a2eb2ed7c52a558e9f716dcb615560ffd132234087c10ccc1f2c63 AS build
+FROM node:20.10.0@sha256:e36ac0440a12839563ad011aabdd3152d6101a9d285126f86b2de5cd7f667712 AS build
 ENV NODE_ENV production
 
 WORKDIR /app
@@ -9,7 +9,7 @@ RUN npm ci --only=production --omit=dev
 
 COPY --chown=node:node . .
 
-FROM node:20.9.0-alpine@sha256:807e66e2bee193961c9642bb1157d77a61747bf76737ca786da45b10749dcb42
+FROM node:20.10.0-alpine@sha256:e96618520c7db4c3e082648678ab72a49b73367b9a1e7884cf75ac30a198e454
 ENV NODE_ENV production
 
 LABEL maintainer="ladral"
