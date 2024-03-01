@@ -111,3 +111,7 @@ export function verify(authorizationHeader) {
         return false;
     }
 }
+
+export function getPublicVerificationKey() {
+    return keyPair.publicKey;
+}

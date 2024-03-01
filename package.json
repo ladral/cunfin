@@ -9,14 +9,14 @@
     "stop": "pm2 kill"
   },
   "dependencies": {
-    "@grpc/grpc-js": "^1.10.0",
+    "@grpc/grpc-js": "^1.10.1",
     "@grpc/proto-loader": "^0.7.10",
-    "dotenv": "^16.4.2",
+    "dotenv": "^16.4.5",
     "jsonwebtoken": "^9.0.2"
   },
   "devDependencies": {
-    "eslint": "^8.56.0",
-    "nodemon": "^3.0.3",
+    "eslint": "^8.57.0",
+    "nodemon": "^3.1.0",
     "pm2": "^5.3.1"
   }
 }

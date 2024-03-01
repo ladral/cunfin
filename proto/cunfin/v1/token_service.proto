@@ -1,10 +1,13 @@
 syntax = "proto3";
 
+import "google/protobuf/empty.proto";
+
 package cunfin.v1;
 
 service TokenService {
   rpc GenerateToken (GenerateTokenRequest) returns (GenerateTokenResponse);
   rpc Introspect (IntrospectRequest) returns (IntrospectResponse);
+  rpc GetPublicKey (GetPublicKeyRequest) returns (GetPublicKeyResponse);
 }
 
 message GenerateTokenRequest {
@@ -24,4 +27,12 @@ message IntrospectRequest {
 
 message IntrospectResponse {
   bool active = 1;
+}
+
+message GetPublicKeyRequest {
+  google.protobuf.Empty empty = 1;
+}
+
+message GetPublicKeyResponse {
+  string public_key = 1;
 }
