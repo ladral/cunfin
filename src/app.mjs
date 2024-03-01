@@ -31,13 +31,11 @@ const keyCertPairs = loadSslCert();
 if (keyCertPairs) {
     console.log('Using provided certificates for TLS connection');
     server.bindAsync('0.0.0.0:50051', grpc.ServerCredentials.createSsl(keyCertPairs.cert,  [{ private_key: keyCertPairs.key, cert_chain: keyCertPairs.cert }]), () => {
-        server.start();
         console.log('gRPC server started successfully');
     });
 } else {
     console.log("Starting gRPC server in insecure mode without TLS cert");
     server.bindAsync('0.0.0.0:50051', grpc.ServerCredentials.createInsecure(), () => {
-        server.start();
         console.log('gRPC server started successfully');
     });
 }
