@@ -4,6 +4,9 @@
       "options": {
         "rest": {
           "pathParams": []
+        },
+        "grpc": {
+          "disableServerCertificateValidation": true
         }
       }
     },

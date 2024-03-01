@@ -1,6 +1,6 @@
 import 'dotenv/config';
 import {loadProtoDefinition} from "./infra/proto-loader-proxy.mjs";
-import {issueJWT, verify} from "./service/token.service.mjs";
+import {issueJWT, verify, getPublicVerificationKey} from "./service/token.service.mjs";
 import {loadSslCert} from "./infra/tls-cert-loader.mjs";
 import grpc from "@grpc/grpc-js";
 
@@ -17,12 +17,18 @@ function generateToken(call, callback) {
     callback(null, { access_token: accessToken, token_type: "Bearer" });
 }
 
+function getPublicKey(call, callback) {
+    const publicKey = getPublicVerificationKey();
+    callback(null, {public_key: publicKey});
+}
+
 const server = new grpc.Server();
 
 /* register gRPC token service */
 server.addService(protoDefinition.cunfin.v1.TokenService.service, {
     introspect,
-    generateToken
+    generateToken,
+    getPublicKey
 });
 
 /* start gRPC server */
