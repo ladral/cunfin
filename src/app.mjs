@@ -7,7 +7,7 @@ import grpc from "@grpc/grpc-js";
 const protoDefinition = loadProtoDefinition();
 
 function introspect(call, callback) {
-    console.log("introspect token");
+    console.debug("introspect token");
     const result = verify(call.request.token);
     callback(null, {active: result});
 }
@@ -19,6 +19,7 @@ function generateToken(call, callback) {
 }
 
 function getPublicKey(call, callback) {
+    console.debug("get public key");
     const publicKey = getPublicVerificationKey();
     callback(null, {public_key: publicKey});
 }
