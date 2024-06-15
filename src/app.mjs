@@ -7,6 +7,7 @@ import grpc from "@grpc/grpc-js";
 const protoDefinition = loadProtoDefinition();
 
 function introspect(call, callback) {
+    console.log("introspect token");
     const result = verify(call.request.token);
     callback(null, {active: result});
 }

@@ -100,10 +100,11 @@ export function verify(authorizationHeader) {
     if (bearerPattern.test(tokenParts[0]) && tokenParts[1].match(tokenPattern) !== null) {
 
         try {
-            const verification = jsonwebtoken.verify(tokenParts[1], keyPair.publicKey, { algorithms: [algorithm] });
+            const decodedToken = jsonwebtoken.verify(tokenParts[1], keyPair.publicKey, { algorithms: [algorithm] });
+            return decodedToken.iss === "cunfin";
 
-            return  true;
         } catch(err) {
+            console.log('token is invalid');
             return  false;
         }
 
